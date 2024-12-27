@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="km_product_menu_root" name="King Motor">
+    <menuitem id="km_product_first_level_menu" name="Product">
+      <menuitem id="km_product_menu_action" action="km_product_action"/>
+    </menuitem>
+  </menuitem>
+
+</odoo>
