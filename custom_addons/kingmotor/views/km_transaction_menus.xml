@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="km_transaction_first_level_menu" name="Transaction" parent="km_product_menu_root" action="km_transaction_action" sequence="2" />
+
+</odoo>

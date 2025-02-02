@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="km_transaction_action" model="ir.actions.act_window">
+    <field name="name">Aksi</field>
+    <field name="res_model">km.transaction</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="km_transaction_view_tree" model="ir.ui.view">
+    <field name="name">km.transaction.tree</field>
+    <field name="model">km.transaction</field>
+    <field name="arch" type="xml">
+      <tree string="Transaksi">
+        <field name="number"/>
+        <field name="date"/>
+        <field name="total"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="km_transaction_view_form" model="ir.ui.view">
+    <field name="name">km.transaction.form</field>
+    <field name="model">km.transaction</field>
+    <field name="arch" type="xml">
+      <form>
+        <header>
+          <button string="Buat Invoice" name="action_set_transaction_status_to_paid" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('total', '=', 0), ('status', '=', 'invoiced')]}" />
+          <field name="status" widget="statusbar" statusbar_visible="draft,invoiced"/>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="number"/>
+            </group>
+            <group>
+              <field name="date"/>
+            </group>
+          </group>
+          <group>
+            <field name="partner_id" />
+          </group>
+          <group>
+            <group>
+              <field name="cashier"/>
+            </group>
+            <group>
+              <field name="mechanic"/>
+            </group>
+          </group>
+          <group>
+            <field name="transaction_line_ids">
+              <tree string="Barang">
+                <field name="product_id"/>
+                <field name="quantity"/>
+                <field name="price"/>
+                <field name="subtotal"/>
+              </tree>
+            </field>
+          </group>
+          <group>
+            <field name="total"/>
+          </group>
+          <group>
+            <field name="discount" widget="percentage" options="{'suffix': '%'}" attrs="{'readonly': [('total', '=', 0)]}" />
+          </group>
+          <group>
+            <field name="net_total"/>
+          </group>
+          <group>
+            <!-- Add checkbox for setting a reminder -->
+            <field name="set_reminder" widget="boolean" />
+          </group>
+          <group attrs="{'invisible': [('set_reminder', '=', False)]}">
+            <group>
+              <field name="reminder_ids">
+                <tree>
+                  <field name="date" />
+                  <field name="notes" />
+                </tree>
+              </field>
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+</odoo>
+

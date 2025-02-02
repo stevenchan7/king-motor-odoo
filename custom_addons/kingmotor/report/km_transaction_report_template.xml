@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <template id="report_transaction">
+    <t t-call="web.html_container">
+      <t t-foreach="docs" t-as="transaction">
+        <div class="page">
+          <h2>Nota</h2>
+          <div style="display: flex; flex-direction: row;">
+            <div class="col">
+              <p>
+                <strong>Tanggal:</strong> <span t-field="transaction.date" />
+              </p>
+            </div>
+            <div class="col">
+              <p>
+                <strong>Nomor:</strong> <span t-field="transaction.number" />
+              </p>
+            </div>
+          </div>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nama Barang</th>
+                <th>Jumlah</th>
+                <th>Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <t t-foreach="transaction.transaction_line_ids" t-as="line">
+                <tr>
+                  <td><span t-field="line.product_id.name" /></td>
+                  <td><span t-field="line.quantity" /></td>
+                  <td><span t-field="line.subtotal" /></td>
+                </tr>
+              </t>
+            </tbody>
+          </table>
+          <p style="text-align: right; font-size: large;">
+            <strong>Total:</strong> <span t-field="transaction.total" />
+          </p>
+        </div>
+      </t>
+    </t>
+  </template>
+  
+</odoo>

@@ -5,4 +5,6 @@ class Product(models.Model):
 
   name = fields.Char('Nama Barang', required=True)
   code = fields.Char('Kode Barang', required=True)
-  jenis = fields.Char('Kode Barang', required=True)
+  price = fields.Integer('Harga Barang', required=True)
+  stock = fields.Integer('Stok', default="1", required=True)
+  product_category_id = fields.Many2one("km.product.category", string="Kategori", required=True)

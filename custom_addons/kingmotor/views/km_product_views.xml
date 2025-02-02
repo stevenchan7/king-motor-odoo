@@ -2,9 +2,23 @@
 <odoo>
 
   <record id="km_product_action" model="ir.actions.act_window">
-    <field name="name">Product Action</field>
+    <field name="name">Inventory</field>
     <field name="res_model">km.product</field>
     <field name="view_mode">tree,form</field>
+  </record>
+
+  <record id="km_product_view_tree" model="ir.ui.view">
+    <field name="name">km.product.tree</field>
+    <field name="model">km.product</field>
+    <field name="arch" type="xml">
+      <tree string="Barang">
+        <field name="name"/>
+        <field name="code"/>
+        <field name="product_category_id" />
+        <field name="price"/>
+        <field name="stock"/>
+      </tree>
+    </field>
   </record>
 
 </odoo>

@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="action_report_transaction" model="ir.actions.report">
+          <field name="name">Transaction</field>
+          <field name="model">km.transaction</field>
+          <field name="report_type">qweb-pdf</field>
+          <field name="report_name">kingmotor.report_transaction</field>
+          <field name="report_file">kingmotor.report_transaction</field>
+          <field name="print_report_name">'Transaction - %s' % (object.number).replace('/','')</field>
+          <field name="binding_model_id" ref="model_km_transaction"/>
+          <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

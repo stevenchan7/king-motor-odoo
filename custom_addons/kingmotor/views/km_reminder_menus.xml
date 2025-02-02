@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <menuitem id="km_reminder_menu_action" name="Reminder" action="km_reminder_action" parent="km_product_menu_root" sequence="4"/>
+
+</odoo>

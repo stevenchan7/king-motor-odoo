@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="km_reminder_action" model="ir.actions.act_window">
+    <field name="name">Aksi</field>
+    <field name="res_model">km.reminder</field>
+    <field name="view_mode">tree,kanban</field>
+    <field name="context">{'group_by': ['is_contacted', 'month']}</field>
+  </record>
+
+  <record id="km_reminder_view_tree" model="ir.ui.view">
+    <field name="name">km.reminder.view.tree</field>
+    <field name="model">km.reminder</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="number" />
+        <field name="date" />
+        <field name="notes" />
+        <field name="is_contacted" attrs="{'invisible': 1}" />
+        <field name="month" attrs="{'invisible': 1}" />
+        <button type="object" name="open_transaction_form_view" string="Invoice" />
+        <button type="object" name="open_res_partner_form_view" string="Customer" />
+        <button type="object" name="set_is_contacted_to_true" string='Contacted' attrs="{'invisible': [('is_contacted', '=', True)]}" class="oe_highlight" />
+      </tree>
+    </field>
+  </record>
+
+  <record id="km_reminder_view_form" model="ir.ui.view">
+    <field name="name">km.reminder.view.form</field>
+    <field name="model">km.reminder</field>
+    <field name="arch" type="xml">
+      <form string="Reminder">
+        <sheet>
+          <group>
+            <field name="date" />
+            <field name="notes" />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="km_reminder_search_view" model="ir.ui.view">
+    <field name="name">km.reminder.view.search</field>
+    <field name="model">km.reminder</field>
+    <field name="arch" type="xml">
+      <search>
+        <group expand="0" string="Group By">
+            <filter string="Is Contacted" name="is_contacted" context="{'group_by': 'is_contacted'}"/>
+            <filter string="Month" name="month" context="{'group_by': 'month'}"/>
+        </group>
+      </search>
+    </field>
+</record>
+
+</odoo>
+

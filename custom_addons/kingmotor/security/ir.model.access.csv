@@ -1,2 +1,6 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
 access_km_product,access.km.product,model_km_product,base.group_user,1,1,1,1
+access_km_product_category,access.km.product.category,model_km_product_category,base.group_user,1,1,1,1
+access_km_transaction,access.km.transaction,model_km_transaction,base.group_user,1,1,1,1
+access_km_transaction_line,access.km.transaction.line,model_km_transaction_line,base.group_user,1,1,1,1
+access_km_reminder,access.km.reminder,model_km_reminder,base.group_user,1,1,1,1
