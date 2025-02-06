@@ -2,7 +2,7 @@
 <odoo>
 
   <record id="km_transaction_action" model="ir.actions.act_window">
-    <field name="name">Aksi</field>
+    <field name="name">Transaction</field>
     <field name="res_model">km.transaction</field>
     <field name="view_mode">tree,form</field>
   </record>
@@ -39,6 +39,14 @@
           </group>
           <group>
             <field name="partner_id" />
+          </group>
+          <group>
+            <group>
+              <field name="vehicle_id" attrs="{'readonly': [('partner_id', '=', False)]}" />
+            </group>
+            <group>
+              <field name="vehicle_type" />
+            </group>
           </group>
           <group>
             <group>

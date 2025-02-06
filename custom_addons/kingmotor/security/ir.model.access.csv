@@ -4,3 +4,4 @@ access_km_product_category,access.km.product.category,model_km_product_category,
 access_km_transaction,access.km.transaction,model_km_transaction,base.group_user,1,1,1,1
 access_km_transaction_line,access.km.transaction.line,model_km_transaction_line,base.group_user,1,1,1,1
 access_km_reminder,access.km.reminder,model_km_reminder,base.group_user,1,1,1,1
+access_km_vehicle,access.km.vehicle,model_km_vehicle,base.group_user,1,1,1,1

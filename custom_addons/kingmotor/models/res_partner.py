@@ -1,7 +1,9 @@
-from odoo import models, api
+from odoo import models, api, fields, _
 
 class ResPartner(models.Model):
   _inherit = 'res.partner'
+
+  vehicle_ids = fields.One2many('km.vehicle', 'partner_id', string=_('Vehicles'))
 
   def name_get(self):
     result = []

@@ -2,7 +2,7 @@
 <odoo>
 
   <record id="km_reminder_action" model="ir.actions.act_window">
-    <field name="name">Aksi</field>
+    <field name="name">Reminder</field>
     <field name="res_model">km.reminder</field>
     <field name="view_mode">tree,kanban</field>
     <field name="context">{'group_by': ['is_contacted', 'month']}</field>

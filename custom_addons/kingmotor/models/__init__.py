@@ -1,1 +1,1 @@
-from . import km_product, km_product_category, km_transaction, km_reminder, res_partner
+from . import km_product, km_product_category, km_transaction, km_reminder, res_partner, km_vehicle

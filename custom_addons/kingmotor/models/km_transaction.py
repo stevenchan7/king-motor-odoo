@@ -9,6 +9,12 @@ class Transaction(models.Model):
   cashier = fields.Char('Kasir', required=True)
   mechanic = fields.Char('Mekanik', required=True)
   partner_id = fields.Many2one('res.partner', 'Pelanggan', required=True)
+  vehicle_id = fields.Many2one(
+    'km.vehicle', 
+    string="Vehicle", 
+    domain="[('partner_id', '=', partner_id)]",
+  )
+  vehicle_type = fields.Char(related='vehicle_id.type', string='Vehicle Type', readonly=True)
   status = fields.Selection([
      ('draft', _('Draft')),
      ('invoiced', _('Invoiced'))
@@ -29,6 +35,10 @@ class Transaction(models.Model):
   def _compute_net_total(self):
     for transaction in self:
       transaction.net_total = transaction.total - (transaction.total * transaction.discount)
+
+  @api.onchange('partner_id')
+  def _onchange_partner_id(self):
+    self.vehicle_id = False
 
   @api.model
   def create(self, vals):

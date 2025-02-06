@@ -1,0 +1,15 @@
+sudo docker run -d --name postgresql \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env POSTGRESQL_PASSWORD=bitnami \
+  --network odoo-network \
+  --volume postgresql_data:/bitnami/postgresql \
+  bitnami/postgresql:latest
+
+docker run --name odoo \
+  -p 80:8069 \
+  --env ALLOW_EMPTY_PASSWORD=yes \
+  --env ODOO_DATABASE_ADMIN_PASSWORD=bitnami \
+  --network odoo-network \
+  --volume /home/c014b4ky3540/king-motor-odoo/odoo-data:/bitnami/odoo \
+  --volume /home/c014b4ky3540/king-motor-odoo/custom-addons:/bitnami/odoo/addons \
+  bitnami/odoo:16
