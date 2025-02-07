@@ -28,8 +28,8 @@
 								</div>
 								<div class="ml-4">
 									<p>Alamat: -</p>
-									<p>No. Pol: DK 1121 AX</p>
-									<p>Mobil: Toyota Hiace Putih</p>
+									<p>No. Pol: <t t-esc="o.vehicle_plate_number" /></p>
+									<p>Mobil: <t t-esc="o.vehicle_type" /></p>
 								</div>
 							</div>
 							<div class="row mt-2">
