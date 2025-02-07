@@ -4,7 +4,7 @@
   'depends': [
     'base',
     'account',
-    'base_accounting_kit'
+    'base_accounting_kit',
   ],
   'data': [
     'security/ir.model.access.csv',
@@ -20,6 +20,9 @@
     # 'report/km_transaction_reports.xml',
     'views/km_reminder_views.xml',
     'views/km_reminder_menus.xml',
+    # 'views/account_move_view.xml',
+    # 'views/km_invoice.xml',
+    # 'report/report_invoice.xml'
   ],
   'installable': True,
   'application': True,

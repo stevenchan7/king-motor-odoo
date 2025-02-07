@@ -4,7 +4,7 @@ services:
     ports: 
       - '6543:5432'
     volumes:
-      - './postgresql_data:/bitnami/postgresql'
+      - './postgresql-data:/bitnami/postgresql'
     environment:
       # ALLOW_EMPTY_PASSWORD is recommended only for development.
       - ALLOW_EMPTY_PASSWORD=yes
@@ -12,7 +12,7 @@ services:
       - POSTGRESQL_DATABASE=bitnami_odoo
   odoo:
     image: docker.io/bitnami/odoo:16
-    container_name: odoo_c
+    container_name: odoo16
     ports:
       - '80:8069'
     volumes:

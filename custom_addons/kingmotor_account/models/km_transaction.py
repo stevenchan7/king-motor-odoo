@@ -28,6 +28,8 @@ class Transaction(models.Model):
             'partner_id': self.partner_id.id,
             'journal_id': journal.id,  # company comes from the journal
             'invoice_date': self.date,
+            'vehicle_plate_number': self.vehicle_id.plate, # Custom fields vehicle_plate_number, vehicle_type
+            'vehicle_type': self.vehicle_type
         }
         return invoice_vals
 

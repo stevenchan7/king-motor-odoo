@@ -106,7 +106,8 @@
         'data/account_pdc_data.xml',
         'views/report_payment_receipt_document_inherit.xml',
         # Custom
-        'views/report_invoice.xml',
+        'report/report_kingmotor_invoice.xml',
+        'views/kingmotor_invoice_template.xml',
     ],
     'assets': {
         'web.assets_backend': [

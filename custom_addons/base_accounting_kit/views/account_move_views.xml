@@ -14,6 +14,13 @@
             <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
                 <field string="Asset Category" name="asset_category_id" invisible="1"/>
             </xpath>
+            <xpath expr="//form/header" position="inside">
+                <button name="action_print_kingmotor_invoice"
+                        string="Kingmotor Invoice"
+                        type="object"
+                        class="btn-primary"
+                        icon="fa-print"/>
+            </xpath>
         </field>
     </record>
 

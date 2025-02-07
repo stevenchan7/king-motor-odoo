@@ -36,6 +36,8 @@ class AccountMove(models.Model):
     asset_depreciation_ids = fields.One2many('account.asset.depreciation.line',
                                              'move_id',
                                              string='Assets Depreciation Lines')
+    vehicle_plate_number = fields.Char(string=_('Vehicle Plate Number'))
+    vehicle_type = fields.Char(string=_('Vehicle Type'))
 
     def button_cancel(self):
         for move in self:
@@ -75,6 +77,9 @@ class AccountMove(models.Model):
             context.pop('default_type', None)
             inv.invoice_line_ids.with_context(context).asset_create()
         return result
+    
+    def action_print_kingmotor_invoice(self):
+        return self.env.ref('base_accounting_kit.action_report_kingmotor_invoice').report_action(self)
 
 
 class AccountInvoiceLine(models.Model):
@@ -270,3 +275,14 @@ class AccountInvoiceLine(models.Model):
                 vals['asset_category_id'] = template.asset_category_id.id if (
                                             template.asset_category_id) else False
         return super().create(vals_list)
+
+class ReportKingmotorInvoice(models.AbstractModel):
+    _name = "report.base_accounting_kit.report_kingmotor_invoice"
+    _description = "Kingmotor Invoice Report"
+
+    def _get_report_values(self, docids, data=None):
+        docs = self.env['account.move'].browse(docids)
+        return {
+            'docs': docs,
+            'company': self.env.company,  # Ensure company is passed to QWeb
+        }

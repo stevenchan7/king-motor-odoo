@@ -1,4 +1,5 @@
 .vscode
 odoo
 odoo-data
-postgresql_data
+postgresql-data
+prev_data

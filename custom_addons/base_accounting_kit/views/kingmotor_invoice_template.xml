@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<template id="report_kingmotor_invoice">
+		<t t-call="web.html_container">
+			<t t-foreach="docs" t-as="o">
+				<div class="page" style="font-family: Arial, Helvetica, sans-serif;">
+					<style>
+              th, td, p {
+                font-size: 12px;
+              }
+
+              p {
+                margin-bottom: 0
+              }
+          </style>
+					<!-- Header -->
+					<div class="row align-items-center">
+						<div class="col-2">
+							<img t-if="company.logo" t-att-src="image_data_uri(company.logo)" class="w-100" alt="Logo"/>
+						</div>
+						<div class="col-10">
+							<h6 class="mb-2">AUTO KING MOTOR</h6>
+							<div class="d-flex flex-row">
+								<div>
+									<p>Melayani Jasa Service Mobil, Tune Up, Service AC</p>
+									<p>Jl Raya Mertasari 115A Sidakarya, Denpasar Selatan</p>
+									<p>Telp/HP 081338763696</p>
+								</div>
+								<div class="ml-4">
+									<p>Alamat: -</p>
+									<p>No. Pol: DK 1121 AX</p>
+									<p>Mobil: Toyota Hiace Putih</p>
+								</div>
+							</div>
+							<div class="row mt-2">
+								<div class="col-6">
+									<div class="d-flex flex-row">
+										<p>Tgl 
+											<t t-esc="o.invoice_date" />
+										</p>
+										<p class="ml-2">No. 
+											<t t-esc="o.name" />
+										</p>
+									</div>
+								</div>
+								<div class="col-6">
+									<h6 class="text-right">#Nota Cashier/Service</h6>
+								</div>
+							</div>
+						</div>
+					</div>
+					<table class="table table-borderless table-sm">
+						<thead>
+							<tr>
+								<th class="border-top border-bottom border-dark">No.</th>
+								<th class="border-top border-bottom border-dark">PLU/Kode</th>
+								<th class="border-top border-bottom border-dark">Keterangan Jasa/Service/SparePart/dll</th>
+								<th class="border-top border-bottom border-dark">Qty</th>
+								<th class="border-top border-bottom border-dark">Harga</th>
+								<th class="border-top border-bottom border-dark">Total (Rp)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<t t-set="index" t-value="0" />
+							<!-- Loop Through Invoice Lines -->
+							<t t-foreach="o.invoice_line_ids" t-as="line" t-enumerate="index">
+								<!-- Check if line is not "Diskon" -->
+								<t t-if="line.name != 'Diskon'">
+									<t t-set="index" t-value="index + 1" />
+									<tr>
+										<td class="border-top border-bottom border-dark">
+											<t t-esc="index" />
+										</td>
+										<td class="border-top border-bottom border-dark">
+											<t t-esc="line.product_code" />
+										</td>
+										<td class="border-top border-bottom border-dark">
+											<t t-esc="line.name" />
+										</td>
+										<td class="border-top border-bottom border-dark">
+											<t t-esc="line.quantity" />
+										</td>
+										<td class="border-top border-bottom border-dark">
+											<t t-esc="line.price_unit" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+										</td>
+										<td class="border-top border-bottom border-dark">
+											<t t-esc="line.price_subtotal" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+										</td>
+									</tr>
+								</t>
+								<t t-set="discount_amount" t-value="0" />
+								<!-- Handle "Diskon" line -->
+								<t t-if="line.name == 'Diskon'">
+									<t t-set="discount_amount" t-value="line.price_unit * -1" /></t>
+							</t>
+						</tbody>
+						<tfoot>
+							<tr>
+								<td colspan="5" class="text-right border-top border-bottom border-dark">
+									<strong>SUB TOTAL:</strong>
+								</td>
+								<td class="border-top border-bottom border-dark">
+									<t t-esc="o.amount_untaxed + discount_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4"></td>
+								<td class="text-right border-bottom border-dark">
+									<strong>TOTAL:</strong>
+								</td>
+								<td class="border-bottom border-dark">
+									<t t-esc="o.amount_total + discount_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4"></td>
+								<td class="text-right border-bottom border-dark">
+									<strong>POTONGAN:</strong>
+								</td>
+								<td class="border-bottom border-dark">
+									<t t-esc="discount_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4"></td>
+								<td class="text-right border-bottom border-dark">
+									<strong>NETTO:</strong>
+								</td>
+								<td class="border-bottom border-dark">
+									<t t-esc="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="4"></td>
+								<td class="text-right border-bottom border-dark">
+									<strong>BAYAR:</strong>
+								</td>
+								<td class="border-bottom border-dark">
+									<t t-esc="o.amount_total" t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="5" class="text-right">
+									<strong>KEMBALI:</strong>
+								</td>
+								<td>0</td>
+							</tr>
+						</tfoot>
+					</table>
+					<!-- Footer -->
+					<div>
+						<div class="border-top border-dark">
+							<p style="font-size: 10px">TELITI SEMUA BARANG BAWAAN ANDA, Terima Kasih!!!</p>
+							<p style="font-size: 10px">KAMI Tidak Akan Bertanggung Jawab Atas Kehilangan/Komplain Pelanggan Setelah Meninggalkan Auto King Motor</p>
+							<p style="font-size: 10px">Pengerjaan mekanik KAMI diluar nota ini tidak resmi dan tidak ada garansi setelah meninggalkan bengkel</p>
+							<p style="font-size: 10px">TERIMA KASIH ATAS KEDATANGANNYA, SAMPAI BERTEMU KEMBALI</p>
+						</div>
+					</div>
+					<!-- Paraf -->
+					<div class="row justify-content-end">
+					  <div class="col-4">
+							<div class="row" style="gap: 0.25rem">
+								<div class="col-4">
+									<div class="border-top border-dark">
+										<p class="text-center">Customer</p>
+									</div>
+								</div>
+								<div class="col-4">
+									<div class="border-top border-dark">
+										<p class="text-center">Cashier</p>
+									</div>
+								</div>
+								<div class="col-4">
+									<div class="border-top border-dark">
+										<p class="text-center">Supervisor</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="mt-2">
+						<p>Pembayaran dapat dilakukan via Transfer Rekening 
+							<span class="font-weight-bold">BCA 7445388815 a/n Enrique Davin</span>
+						</p>
+						<p>Nomor Pengaduan 081353308495</p>
+					</div>
+				</div>
+			</t>
+		</t>
+	</template>
+</odoo>
