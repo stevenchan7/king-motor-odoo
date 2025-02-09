@@ -26,7 +26,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models, _
 from odoo.addons.base.models import decimal_precision as dp
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT as DF
 
 
@@ -79,6 +79,9 @@ class AccountMove(models.Model):
         return result
     
     def action_print_kingmotor_invoice(self):
+        if self.payment_state != 'paid':
+          raise ValidationError(_('Invoice payment state must be paid!'))
+          
         return self.env.ref('base_accounting_kit.action_report_kingmotor_invoice').report_action(self)
 
 

@@ -5,8 +5,10 @@
     'base',
     'account',
     'base_accounting_kit',
+    'whatsapp_redirect'
   ],
   'data': [
+    'security/security.xml',
     'security/ir.model.access.csv',
     'views/km_product_views.xml',
     'views/km_product_menus.xml',
@@ -20,9 +22,6 @@
     # 'report/km_transaction_reports.xml',
     'views/km_reminder_views.xml',
     'views/km_reminder_menus.xml',
-    # 'views/account_move_view.xml',
-    # 'views/km_invoice.xml',
-    # 'report/report_invoice.xml'
   ],
   'installable': True,
   'application': True,

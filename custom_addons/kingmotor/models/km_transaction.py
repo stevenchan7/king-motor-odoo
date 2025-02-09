@@ -11,7 +11,7 @@ class Transaction(models.Model):
   partner_id = fields.Many2one('res.partner', 'Pelanggan', required=True)
   vehicle_id = fields.Many2one(
     'km.vehicle', 
-    string="Vehicle", 
+    string="Vehicle",
     domain="[('partner_id', '=', partner_id)]",
   )
   vehicle_type = fields.Char(related='vehicle_id.type', string='Vehicle Type', readonly=True)
@@ -50,7 +50,7 @@ class Transaction(models.Model):
 	 # Iterate over transaction lines and update product stock
      for line in transaction.transaction_line_ids:
        if line.product_id:
-         line.product_id.stock -= line.quantity  # Subtract quantity from stock
+         line.product_id.sudo().stock -= line.quantity  # Subtract quantity from stock
 
      return transaction
   

@@ -2,8 +2,8 @@
   'name': 'King Motor Account',
   'version': '0.1',
   'depends': [
-    'kingmotor',
-    'account'
+    'account',
+    'kingmotor'
   ],
   'data': [],
   'installable': True,
